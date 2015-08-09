@@ -245,3 +245,41 @@ React为每个状态都提出了两种处理函数，will函数在进入状态�
     style={{opacity:this.state.opacity}}
 
 这是因为 React组件样式 是一个对象，所以第一重大括号表示这是JavaScript，第二重大括号表示样式对象。
+
+demo9: Ajax
+
+组件的数据来源通常是通过Ajax请求从服务器获取，可以使用componentDidMount方法设置Ajax请求，等到请求成功，再用this.setState来重新渲染UI。
+```javascript
+var UserGist = React.createClass({
+    getInitialState:function(){
+        return {
+            username:'',
+            lastGistUrl:''
+        };
+    },
+    componentDidMount:function(){
+        $.get(this.props.source,function(result){
+            var lastGist = result[0];
+            if(this.isMounted()){
+                this.state({
+                    username:lastGist.owner.login,
+                    lastGistUrl:lastGist.html_url
+                });
+            }
+        }.bind(this));
+    },
+    render:function(){
+        return (
+            <div>
+                {this.state.username} s last gist is
+                <a href={this.state.lastGistUrl}>here</a>.
+            </div>
+        );
+    }
+});
+
+React.render({
+    <UserGist source="https://api.github.com/users/octocat/gists" />,
+    document.getElementById('example')
+});
+```

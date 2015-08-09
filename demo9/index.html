@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>React demo9</title>
+<script type="text/javascript" src="../lib/JSXTransformer.js"></script>
+<script type="text/javascript" src="../lib/react.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/jsx">
+var UserGist = React.createClass({
+	getInitialState:function(){
+		return {
+			username:'',
+			lastGistUrl:''
+		};
+	},
+	componentDidMount:function(){
+		$.get(this.props.source,function(result){
+			var lastGist = result[0];
+			if(this.isMounted()){
+				this.state({
+					username:lastGist.owner.login,
+					lastGistUrl:lastGist.html_url
+				});
+			}
+		}.bind(this));
+	},
+	render:function(){
+		return (
+			<div>
+				{this.state.username} s last gist is
+				<a href={this.state.lastGistUrl}>here</a>.
+			</div>
+		);
+	}
+});
+
+React.render({
+	<UserGist source="https://api.github.com/users/octocat/gists" />,
+	document.getElementById('example')
+});
+</script>
+</body>
+</html>
