@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>React demo14</title>
+<script type="text/javascript" src="../lib/JSXTransformer.js"></script>
+<script type="text/javascript" src="../lib/react.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/jsx">
+var data = [
+  {author: "作者 1", text: "评论 1"},
+  {author: "作者 2", text: "*评论 2*"}
+];
+
+var Comment = React.createClass({
+    render:function(){
+        return (
+            <div className="comment">
+                <h2 className = 'commentAuthor'>
+                    {this.props.author}
+                </h2>
+                {this.props.children}
+            </div>
+        );
+    }
+});
+
+var CommentList = React.createClass({
+  render: function() {
+    var commentNodes = this.props.data.map(function (comment) {
+      return (
+        <Comment author={comment.author}>
+          {comment.text}
+        </Comment>
+      );
+    });
+    return (
+      <div className="commentList">
+        {commentNodes}
+      </div>
+    );
+  }
+});
+
+var CommentForm = React.createClass({
+  render: function() {
+    return (
+      <div className="commentForm">
+        Hello world! I am a CommentForm.
+      </div>
+    );
+  }
+});
+var CommentBox = React.createClass({
+  render: function() {
+    return (
+      <div className="commentBox">
+        <h1>Comments</h1>
+        <CommentList data={data}/>
+        <CommentForm />
+      </div>
+    );
+  }
+});
+React.render(<CommentBox />,document.getElementById('example'));
+</script>
+</body>
+</html>

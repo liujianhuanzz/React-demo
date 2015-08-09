@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>React demo13</title>
+<script type="text/javascript" src="../lib/JSXTransformer.js"></script>
+<script type="text/javascript" src="../lib/react.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/jsx">
+var Test = React.createClass({
+    componentDidMount(){
+      alert(React.findDOMNode(this.refs.content).innerHTML);
+    },
+    render(){
+        return <div>
+            <h3>header</h3>
+            <div ref='content'>content</div>
+        </div>;
+    }
+});
+
+React.render(<Test />,document.getElementById('example'));
+</script>
+</body>
+</html>

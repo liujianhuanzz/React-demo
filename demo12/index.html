@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>React demo12</title>
+<script type="text/javascript" src="../lib/JSXTransformer.js"></script>
+<script type="text/javascript" src="../lib/react.js"></script>
+</head>
+<body>
+<div id="example1"></div>
+<div id="example2"></div>
+
+<script type="text/jsx">
+var Test = React.createClass({
+    render(){
+        return <input value="x" />
+    }
+});
+
+React.render(<Test />,document.getElementById('example1'));
+
+var Test = React.createClass({
+    getInitialState(){
+        return {
+            value:'xasdasdf'
+        };
+    },
+    onChange(e){
+        this.setState({
+            value:e.target.value
+        });
+    },
+    render(){
+        return <input value={this.state.value} onChange={this.onChange}/>
+    }
+});
+
+React.render(<Test />,document.getElementById('example2'));
+</script>
+</body>
+</html>

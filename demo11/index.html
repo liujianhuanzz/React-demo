@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>React demo11</title>
+<script type="text/javascript" src="../lib/JSXTransformer.js"></script>
+<script type="text/javascript" src="../lib/react.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/jsx">
+var mixin = {
+    propTypes: {
+        title: React.PropTypes.string,
+    },
+
+    getDefaultProps(){
+        return {
+            title:'default'
+        };
+    },
+};
+
+var A = React.createClass({
+    mixins: [mixin],
+    render(){
+        return <i>{this.props.title}</i>
+    }
+});
+
+var B = React.createClass({
+    mixins: [mixin],
+    render(){
+        return <b>{this.props.title}</b>
+    }
+});
+
+React.render(<div><B/><A title={2}/><A/></div>,
+    document.getElementById('example'));
+</script>
+</body>
+</html>

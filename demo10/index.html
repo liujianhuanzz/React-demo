@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>React demo10</title>
+<script type="text/javascript" src="../lib/JSXTransformer.js"></script>
+<script type="text/javascript" src="../lib/react.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/jsx">
+var Search = React.createClass({
+	render:function(){
+		return (
+			<div>
+				{this.props.searchType}:<input type="text" />
+				<button>Search</button>
+			</div>
+		);
+	}
+});
+
+var Page = React.createClass({
+	render:function(){
+		return (
+			<div>
+				<h1>Welcome!</h1>
+				<Search searchType = 'Title' />
+				<Search searchType = 'Content' />
+			</div>
+		);
+	}
+});
+
+React.render(<Page />,document.getElementById('example'));
+</script>
+</body>
+</html>
