@@ -58,3 +58,19 @@ JSX允许直接在模板插入JavaScript变量。如果这个变量是一个数�
 
 
 上面代码的arr变量是一个数组,JSX会把它的所有成员,添加到模板。
+
+demo3:组件
+
+React允许将代码封装成组件`component`，然后像插入普通HTML标签一样，在网页中插入这个组件。`React.createClass`方法就用于生成一个组件类。
+
+    var HelloMessage = React.createClass({
+        render:function(){
+            return <h1>Hello {this.props.name}</h1>;
+        }
+    });
+    React.render(
+        <HelloMessage name="huanhuan"/>,
+        document.getElementById('example')
+    );
+
+上面代码中，变量`HelloMessage`就是一个组件类。模板插入`<HelloMessage />`时会自动生成`HelloMessage`的一个实例。所有组件类都必须有自己的`render`方法，用于输出组件。组件的用法与原生的HTML标签完全一致，可以任意加入属性，比如`<HelloMessage />`,就是`HelloMessage`组件加入一个`name`属性，值为huanhuan.添加组件属性有一个地方需要注意，就是`class`属性需要写成`className`，`for`属性需要写成`htmlFor`，这是因为`class`和`for`是JavaScript的保留字。
