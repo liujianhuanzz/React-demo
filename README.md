@@ -74,3 +74,30 @@ React允许将代码封装成组件`component`，然后像插入普通HTML标签
     );
 
 上面代码中，变量`HelloMessage`就是一个组件类。模板插入`<HelloMessage />`时会自动生成`HelloMessage`的一个实例。所有组件类都必须有自己的`render`方法，用于输出组件。组件的用法与原生的HTML标签完全一致，可以任意加入属性，比如`<HelloMessage />`,就是`HelloMessage`组件加入一个`name`属性，值为huanhuan.添加组件属性有一个地方需要注意，就是`class`属性需要写成`className`，`for`属性需要写成`htmlFor`，这是因为`class`和`for`是JavaScript的保留字。
+
+demo4:this.props.children
+
+`this.props`对象的属性与组件的属性一一对应，但是有一个例外，就是`this.props.children`属性。它表示组件的所有子节点。
+
+    var NotesList = React.createClass({
+        render:function(){
+            return (
+                <ol>
+                {
+                    this.props.children.map(function(child){
+                        return <li>{child}</li>
+                    })
+                }
+                </ol>
+            );
+        }
+    });
+    
+    React.render(
+        <NotesList>
+            <span>hello</span>
+            <span>world</span>
+        </NotesList>,
+        document.getElementById('example')
+    );
+

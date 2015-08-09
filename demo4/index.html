@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>React demo3</title>
+	<title>React demo4</title>
 <script type="text/javascript" src="../lib/JSXTransformer.js"></script>
 <script type="text/javascript" src="../lib/react.js"></script>
 </head>
@@ -10,15 +10,25 @@
 <div id="example"></div>
 
 <script type="text/jsx">
-
-var HelloMessage = React.createClass({
+var NotesList = React.createClass({
 	render:function(){
-		return <h1>Hello {this.props.name}</h1>;
+		return (
+			<ol>
+			{
+				this.props.children.map(function(child){
+					return <li>{child}</li>
+				})
+			}
+			</ol>
+		);
 	}
 });
 
 React.render(
-	<HelloMessage name="huanhuan"/>,
+	<NotesList>
+		<span>hello</span>
+		<span>world</span>
+	</NotesList>,
 	document.getElementById('example')
 );
 </script>
