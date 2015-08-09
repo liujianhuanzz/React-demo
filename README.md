@@ -126,3 +126,32 @@ demo5: React.findDOMNode()
     );
 
 上面代码中，组件MyComponent的子节点有一个文本输入框，用于获取用户的输入。这时就必须获取真实的DOM节点，虚拟DOM是拿不到用户输入的。为了做到这一点，文本输入框必须有一个ref属性，然后`this.refs.[refName]`就指向这个虚拟DOM的子节点，最后通过`React.findDOMNode`方法获取真实DOM的节点。需要注意的是，由于`React.findDOMNode`方法获取的是真实DOM，所以必须等到虚拟DOM插入文档以后才能调用这个方法，否则会返回null。上面代码中，通过为组件指定Click事件的回调函数，确保了只有等到真实DOM发生Click事件之后，才会调用`React.findDOMNode`方法。
+
+demo6: this.state
+
+组件免不了要与用户互动，React的一大创新，就是将组件看成是一个状态机，一开始有一个初始状态，然后用户互动，导致状态变化，从而触发重新渲染UI。
+
+    var LikeButton = React.createClass({
+        getInitialState:function(){
+            return {liked:false};
+        },
+        handleClick:function(event){
+            this.setState({liked: !this.state.liked});
+        },
+        render:function(){
+            var text = this.state.liked ? 'like' : 'haven\'t liked';
+            return (
+                <p onClick={this.handleClick}>
+                    You {text} this.Click to toggle.
+                </p>
+            ); 
+        }
+    });
+    
+    React.render(
+        <LikeButton />,
+        document.getElementById('example')
+    );
+
+上面代码是一个`LikeButton`组件，它的`getInitialState`方法用于定义初始状态，也就是一个对象，这个对象可以通过`this.state`属性读取。当用户点击组件，导致状态变化，`this.setState`方法就修改状态值，每次修改以后，自动调用`this.render`方法，再次渲染组件。
+由于`this.props`和`this.state`都用于描述组件的特性，可能会产生混淆。一个简单的区分方法是，`this.props`表示那些一旦定义，就不再改变的特性，而`this.state`是会随着用户互动而产生变化的特性。
