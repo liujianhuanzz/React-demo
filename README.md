@@ -197,12 +197,13 @@ React为每个状态都提出了两种处理函数，will函数在进入状态�
  - componentDidUpdate(object prevProps, object prevState)
  - componentWillUnmount()
 
+
 此外，React还提供两种特殊状态的处理函数
 
  - componentWillReceiveProps(object nextProps):已加载组件收到新的参数时调用
  - shouldComponentUpdate(object nextProps,object nextState):组件判断是否重新渲染时调用
-
-  
+ 
+----------
      var Hello = React.createClass({
             getInitialState:function(){
                 return {opacity:1.0};
@@ -235,6 +236,7 @@ React为每个状态都提出了两种处理函数，will函数在进入状态�
 
 上面代码在hello组件加载以后，通过`componentDidMount`方法设置一个定时器每隔100毫秒，就重新设置组件的透明度，从而引发重新渲染。
 另外，组件的style属性的设置方式也值得注意，不能写成
+
 
     style="opacity:{this.state.opacity};"
 
