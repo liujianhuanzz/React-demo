@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>React demo8</title>
+<script type="text/javascript" src="../lib/JSXTransformer.js"></script>
+<script type="text/javascript" src="../lib/react.js"></script>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/jsx">
+var Hello = React.createClass({
+	getInitialState:function(){
+		return {opacity:1.0};
+	},
+	componentDidMount:function(){
+		this.timer = setInterval(function(){
+			var opacity = this.state.opacity;
+			opacity -= .05;
+			if(opacity < 0.1){
+				opacity = 1.0;
+			}
+			this.setState({
+				opacity:opacity
+			});
+		}.bind(this),100);
+	},
+	render:function(){
+		return (
+			<div style={{opacity:this.state.opacity}}>
+				Hello {this.props.name}
+			</div>
+		);
+	}
+});
+
+React.render(
+	<Hello name="world" />,
+	document.getElementById('example')
+);
+</script>
+</body>
+</html>
